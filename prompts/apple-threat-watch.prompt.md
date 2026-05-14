@@ -35,6 +35,7 @@ Post-scan drift handling:
 - Maintain a lightweight dependency-state snapshot for the configured project/tooling roots, including package manager files such as `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lock`, `bun.lockb`, `pyproject.toml`, `uv.lock`, `poetry.lock`, `requirements*.txt`, `Pipfile.lock`, `Cargo.lock`, `go.sum`, `Package.resolved`, `Gemfile.lock`, `composer.lock`, `mix.lock`, and similar ecosystem lock/manifest files.
 - When a run is triggered because local project/tooling files changed, first compare the current dependency-state snapshot to the previous snapshot. If no relevant manifest or lockfile changed, record that and skip heavy checks.
 - If relevant dependency files changed, recheck all tracked threats with package/dependency IOCs against the configured project/tooling roots, update `last_checked`, and record which local files caused the recheck.
+- If new public threat information changes what local file changes should trigger future checks, update the local threat register's next review trigger and local check guidance. If the information is specific enough, add the new package names, lockfile patterns, filenames, domains, process names, or paths to the future trigger/check guidance.
 - Debounce and throttle event-triggered rescans so rapid package-manager writes do not start overlapping Codex runs.
 
 Run cadence and missed-run awareness:
