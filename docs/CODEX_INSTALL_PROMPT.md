@@ -7,6 +7,15 @@ Please install Apple Threat Watch for Codex from this prompt-only repository:
 
 https://github.com/Yelsmeky/apple-threat-watch-codex
 
+If I do not already have Codex installed:
+- Recommend the Codex app first when it is available for my platform, especially on macOS or Windows.
+- Tell me to download the Codex app from the official OpenAI Codex page: https://openai.com/codex/
+- Explain that the Codex app gives a visual local session where I can review the plan, choose components, and approve or reject local configuration.
+- Also explain the Codex CLI option for terminal, Linux, headless, or unattended workflows.
+- For the CLI, use the current OpenAI install command: `npm install -g @openai/codex`.
+- Tell me to verify the CLI with `codex --version` and `codex --help`.
+- Explain that scheduled local components such as LaunchAgents or dependency drift watchdogs may need the CLI because they run `codex exec` unattended after I approve the design.
+
 Important trust boundary:
 - This repository should contain only Markdown documentation and prompts, not executable scripts, binaries, LaunchAgent plists, malware samples, packages, or installers.
 - First inspect the repository and confirm that it is prompt-only.
@@ -39,6 +48,7 @@ Requirements:
 - Install into ~/AppleThreatWatch unless I specify another path.
 - Generate any needed local scripts, config files, and LaunchAgent plist yourself from the plan language in this repository.
 - Before writing files or loading a LaunchAgent, show me the generated plan, local file paths, and exact commands you intend to run.
+- Show me how this installation connects to the Codex app and/or Codex CLI, depending on which interface I choose.
 - Only configure a per-user LaunchAgent if I choose a scheduled or watcher component.
 - If I choose the daily schedule, configure it to run daily at 7:30 AM local time and catch up on next wake using StartCalendarInterval.
 - Keep the workflow read-only: no cleanup, quarantine, deletions, unloads except for replacing this exact LaunchAgent during install/update, resets, installs beyond local generated files, settings changes, or remediation.

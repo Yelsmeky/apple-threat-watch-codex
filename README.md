@@ -46,12 +46,73 @@ For install/update detection, the recommended local design is not to run a full 
 ## Requirements
 
 - macOS.
-- Codex CLI available on the Mac.
-- A Codex login/config that can use `codex exec`.
+- Codex app or Codex CLI.
+- A Codex login/config that can run local Codex sessions.
 - Network access for threat research.
 - Permission to install a per-user LaunchAgent in `~/Library/LaunchAgents/`.
 
 No root LaunchDaemon is used.
+
+## Install Codex First
+
+Apple Threat Watch is a set of instructions for Codex. You need Codex installed before you can use it.
+
+### Recommended: Codex App
+
+Use the Codex app when it is available for your platform. It is the friendliest path because it gives you a visual workspace, lets you review plans before anything is installed, and can manage long-running local tasks more easily than a terminal-only workflow.
+
+OpenAI currently describes the Codex app as available for macOS and Windows. Download it from the official OpenAI Codex page:
+
+- [openai.com/codex](https://openai.com/codex/)
+
+After installing the Codex app:
+
+1. Sign in with your ChatGPT/OpenAI account.
+2. Start a new local session.
+3. Paste the prompt from [docs/CODEX_INSTALL_PROMPT.md](docs/CODEX_INSTALL_PROMPT.md).
+4. Ask for the explanation depth you want: Simple, Detailed, or Expert.
+5. Choose which Apple Threat Watch components to install.
+6. Review the generated files and commands before approving any local install or LaunchAgent.
+
+### Codex CLI
+
+Use the Codex CLI when you prefer terminal workflows, use Linux, need headless/remote operation, or want the generated LaunchAgent/watchdog to run unattended through `codex exec`.
+
+OpenAI's CLI getting-started docs list this install command:
+
+```sh
+npm install -g @openai/codex
+```
+
+Then verify:
+
+```sh
+codex --version
+codex --help
+```
+
+If your npm global install directory is not writable or not on `PATH`, configure Node/npm first using your normal platform package manager or Node version manager. The CLI docs and Codex GitHub repository have the latest platform-specific details:
+
+- [OpenAI Codex CLI Getting Started](https://help.openai.com/en/articles/11096431)
+- [openai/codex on GitHub](https://github.com/openai/codex)
+
+To use this utility with the CLI:
+
+1. Clone or download this prompt-only repository.
+2. Open a terminal in the repository directory.
+3. Run Codex and paste the installer prompt:
+
+```sh
+codex
+```
+
+4. Or run Codex non-interactively with the prompt file:
+
+```sh
+codex exec --cd . - < docs/CODEX_INSTALL_PROMPT.md
+```
+
+The CLI path is especially important if you install unattended local components. The daily LaunchAgent and dependency drift watchdog are generated to call `codex exec` after the user approves that design.
 
 ## Quick Install With Codex
 
