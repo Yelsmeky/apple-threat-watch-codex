@@ -1,6 +1,6 @@
 # Paste This Into Codex
 
-Use this prompt in a new Codex session:
+Open the Codex app, start a new local session, and paste this prompt:
 
 ```text
 Please install Apple Threat Watch for Codex from this prompt-only repository:

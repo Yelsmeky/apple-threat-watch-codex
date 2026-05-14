@@ -48,7 +48,15 @@ No root LaunchDaemon is used.
 
 ## Quick Install With Codex
 
-In a Codex session, ask:
+The easiest path is to install from the Codex app:
+
+1. Open the Codex app on your Mac.
+2. Start a new local session.
+3. Paste the prompt from [docs/CODEX_INSTALL_PROMPT.md](docs/CODEX_INSTALL_PROMPT.md).
+4. Let Codex inspect this repository first and confirm that it is prompt-only.
+5. Review the generated local plan before approving any local files or LaunchAgent configuration.
+
+Short version to paste into Codex:
 
 ```text
 Read this repository. It intentionally contains only prompts and documentation, not executable code. Use docs/CODEX_INSTALL_PROMPT.md to generate a local Apple Threat Watch installation in ~/AppleThreatWatch. Before creating any local files or LaunchAgent, show me the plan and explain what will be generated. Keep the workflow read-only: no cleanup, quarantine, deletions, unloads, resets, settings changes, or remediation.
