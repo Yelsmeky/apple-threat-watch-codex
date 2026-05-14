@@ -61,12 +61,31 @@ The easiest path is to install from the Codex app:
 2. Start a new local session.
 3. Paste the prompt from [docs/CODEX_INSTALL_PROMPT.md](docs/CODEX_INSTALL_PROMPT.md).
 4. Let Codex inspect this repository first and confirm that it is prompt-only.
-5. Review the generated local plan before approving any local files or LaunchAgent configuration.
+5. Choose the explanation depth and install components you want.
+6. Review the generated local plan before approving any local files or LaunchAgent configuration.
+
+The installer prompt should offer explanation depth:
+
+- **Simple**: plain-English purpose, what will run, and what the user needs to approve.
+- **Detailed**: adds file locations, schedules, logs, rollback, and privacy/security notes.
+- **Expert**: adds launchd behavior, command-line details, sandboxing, state files, trigger logic, and failure modes.
+
+The installer prompt should offer component choices:
+
+| Component | What it does | Why it helps | Installation/execution requirements |
+| --- | --- | --- | --- |
+| Manual threat watch | Creates a local workspace and prompt so the user can run checks on demand. | Lowest-risk way to try the workflow before any scheduling. | Creates local files only. Requires Codex CLI/login and network access when run. |
+| Daily Codex/app schedule | Runs the threat watch daily from Codex or from a generated local wrapper. | Keeps recent Apple and developer-supply-chain threats from being forgotten. | Requires Codex automation or a generated wrapper. Needs network access for research. |
+| Wake-aware LaunchAgent | Adds a per-user macOS LaunchAgent using `StartCalendarInterval` so a missed daily run can happen after wake. | More reliable than cron on a sleeping Mac. | Writes a plist under `~/Library/LaunchAgents/`, validates it with `plutil`, and loads it with `launchctl bootstrap` after approval. |
+| Dependency drift watchdog | Watches user-selected project/tooling roots for package manifest and lockfile changes, then rechecks tracked package-manager threats. | Handles the case where a threat was absent during the daily scan but a vulnerable package is installed or updated later. | Requires the user to choose local project/tooling roots. Generates local helper files, a dependency-state snapshot, logs, and a per-user LaunchAgent or equivalent watcher after approval. |
+| iPhone/iPad checklist only | Produces manual inspection guidance for iOS/iPadOS threats. | Useful because macOS cannot fully inspect iPhone/iPad internals directly. | No device changes. User manually checks updates, profiles, VPN, certificates, Lockdown Mode relevance, and account warnings. |
+
+All components remain read-only by default. The workflow should never clean, quarantine, delete, unload, reset, rotate credentials, install packages, update packages, or change settings unless the user separately approves a specific remediation plan.
 
 Short version to paste into Codex:
 
 ```text
-Read this repository. It intentionally contains only prompts and documentation, not executable code. Use docs/CODEX_INSTALL_PROMPT.md to generate a local Apple Threat Watch installation in ~/AppleThreatWatch. Before creating any local files or LaunchAgent, show me the plan and explain what will be generated. Keep the workflow read-only: no cleanup, quarantine, deletions, unloads, resets, settings changes, or remediation.
+Read this repository. It intentionally contains only prompts and documentation, not executable code. Use docs/CODEX_INSTALL_PROMPT.md to guide me through an Apple Threat Watch installation. First ask which explanation depth I want: Simple, Detailed, or Expert. Then explain the available install components, what each does, why it is useful, and what it requires. Do not create files or load LaunchAgents until I choose components and approve the generated plan. Keep the workflow read-only: no cleanup, quarantine, deletions, unloads, resets, settings changes, credential rotation, package installs, package updates, or remediation.
 ```
 
 Codex should then generate local files on your machine. The generated local installation should:
