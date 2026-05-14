@@ -20,6 +20,8 @@ Requirements:
 - Keep the workflow read-only: no cleanup, quarantine, deletions, unloads except for replacing this exact LaunchAgent during install/update, resets, installs beyond local generated files, settings changes, or remediation.
 - The generated wrapper should wait 15 minutes, check whether today's case folder already exists, and skip if it does.
 - The generated wrapper should run codex exec with web search enabled and the hardened prompt in prompts/apple-threat-watch.prompt.md.
+- Ask me which local project/tooling directories should be monitored for package-manager changes.
+- Generate an optional local file-change watchdog that debounces filesystem changes, snapshots package-manager manifest/lockfile state, and triggers a targeted threat-register recheck only when relevant dependency files changed.
 - Verify the generated LaunchAgent plist with plutil.
 - Run the generated wrapper smoke test with no grace period.
 - Show me the installed paths, status command, manual run command, generated files, and uninstall command.

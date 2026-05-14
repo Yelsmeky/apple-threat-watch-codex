@@ -30,8 +30,16 @@ Persistent threat tracking:
 - Do not delete old threats from the register. Mark them `historical`, `resolved`, `superseded`, `monitoring`, or `not locally testable` as appropriate.
 - If a threat has insufficient public detail, keep it in the register and record what future disclosure would make it locally testable.
 
+Post-scan drift handling:
+- Treat later installs, updates, or lockfile changes as a reason to recheck previously tracked threats, even if those threats were not found during the earlier daily scan.
+- Maintain a lightweight dependency-state snapshot for the configured project/tooling roots, including package manager files such as `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lock`, `bun.lockb`, `pyproject.toml`, `uv.lock`, `poetry.lock`, `requirements*.txt`, `Pipfile.lock`, `Cargo.lock`, `go.sum`, `Package.resolved`, `Gemfile.lock`, `composer.lock`, `mix.lock`, and similar ecosystem lock/manifest files.
+- When a run is triggered because local project/tooling files changed, first compare the current dependency-state snapshot to the previous snapshot. If no relevant manifest or lockfile changed, record that and skip heavy checks.
+- If relevant dependency files changed, recheck all tracked threats with package/dependency IOCs against the configured project/tooling roots, update `last_checked`, and record which local files caused the recheck.
+- Debounce and throttle event-triggered rescans so rapid package-manager writes do not start overlapping Codex runs.
+
 Run cadence and missed-run awareness:
 - This run may have been started by a macOS LaunchAgent watchdog because a normal scheduled run might have been missed while the Mac was asleep.
+- This run may also have been started by a local file-change watchdog because a project/tooling dependency manifest or lockfile changed after a previous clean scan.
 - Inspect prior `daily-apple-malware-threat-watch` case folders and record whether a run appears to have been missed since the prior day.
 - If the previous run is older than 30 hours, widen the public-source lookback enough to cover the gap plus the normal one-month threat window, and state that this was a catch-up run.
 - Do not run duplicate heavy checks if another case folder from the same local date already completed successfully; summarize that the day was already covered unless the user explicitly asked for a rerun.

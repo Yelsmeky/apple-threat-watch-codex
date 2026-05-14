@@ -24,6 +24,7 @@ Pull requests are not expected. Use issues for questions or documentation feedba
 - Extracts indicators such as paths, bundle IDs, processes, LaunchAgents, LaunchDaemons, profiles, domains, IPs, certificate/team IDs, TCC behavior, browser/WebKit indicators, and mitigation guidance.
 - Maintains a persistent `threats/threat-register.md` ledger with each threat's source URLs, status, `last_checked` timestamp, local check result, uncertainty, and next review trigger.
 - Scans user-configured local project/tooling roots for developer supply-chain indicators.
+- Tracks dependency-state drift after clean scans, so a package install or lockfile update can trigger a recheck of previously tracked package-manager threats.
 - Starts local triage with targeted checks: OS/update state, profiles, system/network extensions, launch items, processes, suspicious files, dependency lockfiles, active network state, and recent diagnostic reports.
 - Avoids broad `log show --last 30d` scans by default because they can be slow and noisy.
 - Uses narrow unified-log searches only when a specific high-confidence indicator or behavior justifies it.
@@ -36,8 +37,11 @@ There are two layers:
 
 1. A Codex app automation, if the user creates one, can run the threat watch inside Codex.
 2. A macOS per-user LaunchAgent can provide wake-aware catch-up behavior.
+3. An optional local file-change watchdog can notice package/dependency manifest changes and trigger a targeted threat-register recheck.
 
 The LaunchAgent uses `StartCalendarInterval`. Apple `launchd` runs missed calendar events once when the Mac wakes, while cron-style schedules may skip runs while asleep. The wrapper waits a grace period before doing anything, then checks whether today's `Investigations/YYYY.MM.DD-*-daily-apple-malware-threat-watch/` case already exists. If it exists, the wrapper exits. If it does not exist, it runs `codex exec` with the hardened prompt.
+
+For install/update detection, the recommended local design is not to run a full scan on every filesystem event. Instead, Codex should generate a small local watchdog that debounces directory notifications, snapshots package-manager manifest and lockfile state under the configured project/tooling roots, and only runs a targeted recheck when relevant files changed. On macOS this can be implemented with a per-user LaunchAgent plus either native watched paths or a generated FSEvents-based helper. The shared repository does not include that code; the user's local Codex session generates it after showing the plan.
 
 ## Requirements
 
@@ -71,6 +75,7 @@ Codex should then generate local files on your machine. The generated local inst
 - Create the hardened threat-watch prompt from `prompts/apple-threat-watch.prompt.md`.
 - Generate a small local wrapper script.
 - Generate a per-user LaunchAgent plist using your actual local paths.
+- Generate an optional local file-change watchdog for package/dependency manifest changes under your configured project/tooling roots.
 - Ask before loading the LaunchAgent with `launchctl bootstrap`.
 - Create `Investigations/`, `logs/`, and `.state/` folders.
 - Run a smoke test that should skip if today's case already exists or otherwise validate the wrapper.
