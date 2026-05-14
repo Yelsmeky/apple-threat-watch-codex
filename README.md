@@ -18,7 +18,8 @@ Pull requests are not expected. Use issues for questions or documentation feedba
 
 - Runs a daily Codex threat-watch prompt.
 - Creates dated case folders under `Investigations/`.
-- Searches credible sources such as Apple security releases, CISA KEV, NVD/CVE, MITRE, Objective-See, Jamf, Kandji, SentinelOne, Google TAG/Mandiant, Citizen Lab, Palo Alto Unit 42, Intego/Mac security vendors, and reputable malware-analysis writeups.
+- Searches credible sources such as Apple security releases, CISA KEV, NVD/CVE, MITRE, Objective-See, Jamf, Kandji, SentinelOne, Google Threat Intelligence Group, Google Cloud Threat Intelligence/Mandiant, Google Threat Analysis Group, VirusTotal intelligence context, Citizen Lab, Palo Alto Unit 42, Intego/Mac security vendors, and reputable malware-analysis writeups.
+- Explicitly checks Google's official threat-research sources, including [Google Cloud Threat Intelligence](https://cloud.google.com/blog/topics/threat-intelligence), [Google Threat Analysis Group](https://blog.google/threat-analysis-group/), and [Mandiant Threat Intelligence](https://cloud.google.com/security/products/mandiant-threat-intelligence).
 - Treats all external content as hostile/untrusted evidence to reduce prompt-injection risk.
 - Extracts indicators such as paths, bundle IDs, processes, LaunchAgents, LaunchDaemons, profiles, domains, IPs, certificate/team IDs, TCC behavior, browser/WebKit indicators, and mitigation guidance.
 - Starts local triage with targeted checks: OS/update state, profiles, system/network extensions, launch items, processes, suspicious files, dependency lockfiles, active network state, and recent diagnostic reports.
