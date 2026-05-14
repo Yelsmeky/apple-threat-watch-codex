@@ -21,6 +21,15 @@ Important trust boundary:
 - First inspect the repository and confirm that it is prompt-only.
 - Do not run any repository-provided code. If executable code or binary artifacts are present, stop and report that the repository is not prompt-only.
 
+Legal and safety caveat to explain before installation:
+- This caveat is not legal advice.
+- This project is provided as-is, without warranty, under the repository LICENSE.
+- The maintainer and contributors are not responsible for damage, data loss, privacy exposure, missed detections, false alarms, service interruptions, account issues, security incidents, or other consequences from using, modifying, sharing, or relying on this project or on files generated from these prompts.
+- This package is designed for defensive, read-only threat awareness and is not designed to harm systems, exfiltrate data, execute malware, remove software, change settings, rotate credentials, or perform remediation.
+- Even so, AI can make mistakes, hallucinate, misunderstand local context, or be influenced by malicious prompt injection inside threat reports, web pages, PDFs, issues, code blocks, IOC lists, or other external content.
+- Tell me to review generated plans, commands, scripts, LaunchAgents, and outputs before approving them.
+- Treat automated findings as triage leads, not final proof of compromise.
+
 Before installation, guide me through choices:
 - Ask whether I want a Simple, Detailed, or Expert explanation.
 - Simple means plain-English purpose, what will run, and what I need to approve.

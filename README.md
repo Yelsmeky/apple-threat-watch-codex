@@ -6,6 +6,18 @@ It searches credible Apple/security sources for recent malware, spyware, zero-da
 
 This project is not antivirus. It is a daily threat-intelligence and local triage helper. It does not clean, quarantine, delete, unload, reset, install tools, change settings, or modify account/device/network state.
 
+## Legal And Safety Notice
+
+This notice is not legal advice. If you need legal protection for a specific distribution, business, or jurisdiction, have a qualified lawyer review the project and license terms.
+
+This project is provided as-is, without warranty, and without any promise that it will detect every threat, avoid every false positive, or behave correctly in every local environment. See [LICENSE](LICENSE) for the controlling license terms, including the warranty disclaimer and limitation of liability.
+
+The maintainer and contributors are not responsible for damage, data loss, privacy exposure, missed detections, false alarms, service interruptions, account issues, security incidents, or other consequences that may result from using, modifying, sharing, or relying on this project or on files generated from these prompts.
+
+This package is designed for defensive, read-only threat awareness. It is not designed to harm systems, exfiltrate data, execute malware, remove software, change settings, rotate credentials, or perform remediation. Even so, AI systems can make mistakes, misunderstand instructions, hallucinate details, or be influenced by malicious content such as prompt injection embedded in web pages, PDFs, issue comments, code blocks, indicators of compromise, or threat reports. Users should review generated plans, commands, scripts, LaunchAgents, and outputs before approving them.
+
+Use this project at your own risk. If you are investigating a real compromise, high-value system, enterprise-managed device, legal matter, or safety-critical environment, consult a qualified security professional before relying on automated results.
+
 ## Trust Model: Prompt-Only Repository
 
 This repository intentionally contains no executable installer, shell wrapper, LaunchAgent plist, package script, binary, or malware sample.

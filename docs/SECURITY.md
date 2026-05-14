@@ -2,6 +2,18 @@
 
 Apple Threat Watch is designed for defensive use. It should be treated as a read-only triage workflow, not a remediation agent.
 
+## Legal And Safety Notice
+
+This notice is not legal advice. If you need legal protection for a specific distribution, business, or jurisdiction, have a qualified lawyer review the project and license terms.
+
+This project is provided as-is, without warranty, under the terms in the repository [LICENSE](../LICENSE). The maintainer and contributors do not guarantee that it will detect every threat, avoid every false positive, or run correctly in every environment.
+
+The maintainer and contributors are not responsible for damage, data loss, privacy exposure, missed detections, false alarms, service interruptions, account issues, security incidents, or other consequences that may result from using, modifying, sharing, or relying on this project or on files generated from these prompts.
+
+This package is intended for defensive, read-only threat awareness. It is not intended to harm systems, exfiltrate data, execute malware, remove software, change settings, rotate credentials, or perform remediation. However, AI-assisted workflows can go wrong. Models can misunderstand instructions, hallucinate details, overgeneralize from weak evidence, or be influenced by malicious content such as prompt injection inside threat reports, web pages, PDFs, GitHub issues, code blocks, or IOC lists.
+
+Users should review generated plans, commands, scripts, LaunchAgents, and outputs before approving them, and should treat automated findings as triage leads rather than final proof of compromise.
+
 ## Prompt-Only Distribution
 
 The shared repository should contain only Markdown documentation and prompt files.
