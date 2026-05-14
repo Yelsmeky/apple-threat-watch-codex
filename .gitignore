@@ -1,0 +1,7 @@
+.DS_Store
+.state/
+logs/
+Investigations/
+config/watch.conf
+scripts/
+launchd/

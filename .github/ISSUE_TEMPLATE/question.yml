@@ -1,0 +1,24 @@
+name: Question or Feedback
+description: Ask a question or suggest a documentation improvement.
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the feedback. This project is prompt-only and does not accept executable code, malware samples, exploit code, or installer scripts.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question or feedback
+      description: What would you like clarified or improved?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: This issue does not include malware samples, exploit code, secrets, tokens, or private logs.
+          required: true
+
