@@ -22,6 +22,8 @@ Pull requests are not expected. Use issues for questions or documentation feedba
 - Explicitly checks Google's official threat-research sources, including [Google Cloud Threat Intelligence](https://cloud.google.com/blog/topics/threat-intelligence), [Google Threat Analysis Group](https://blog.google/threat-analysis-group/), and [Mandiant Threat Intelligence](https://cloud.google.com/security/products/mandiant-threat-intelligence).
 - Treats all external content as hostile/untrusted evidence to reduce prompt-injection risk.
 - Extracts indicators such as paths, bundle IDs, processes, LaunchAgents, LaunchDaemons, profiles, domains, IPs, certificate/team IDs, TCC behavior, browser/WebKit indicators, and mitigation guidance.
+- Maintains a persistent `threats/threat-register.md` ledger with each threat's source URLs, status, `last_checked` timestamp, local check result, uncertainty, and next review trigger.
+- Scans user-configured local project/tooling roots for developer supply-chain indicators.
 - Starts local triage with targeted checks: OS/update state, profiles, system/network extensions, launch items, processes, suspicious files, dependency lockfiles, active network state, and recent diagnostic reports.
 - Avoids broad `log show --last 30d` scans by default because they can be slow and noisy.
 - Uses narrow unified-log searches only when a specific high-confidence indicator or behavior justifies it.
