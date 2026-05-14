@@ -1,11 +1,11 @@
 # Paste This Into Codex
 
-Use this prompt in a new Codex session after you have the repository URL:
+Use this prompt in a new Codex session:
 
 ```text
 Please install Apple Threat Watch for Codex from this prompt-only repository:
 
-<PASTE_GITHUB_URL_HERE>
+https://github.com/Yelsmeky/apple-threat-watch-codex
 
 Important trust boundary:
 - This repository should contain only Markdown documentation and prompts, not executable scripts, binaries, LaunchAgent plists, malware samples, packages, or installers.
